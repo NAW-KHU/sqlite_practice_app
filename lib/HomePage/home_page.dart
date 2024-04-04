@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            textBaseline: TextBaseline.ideographic,
+                            
                             children: [
                               
                               Text('${customerLists[index].firstName} ${customerLists[index].lastName}', textAlign: TextAlign.center, style: const TextStyle(
