@@ -135,22 +135,17 @@ class _HomePageState extends State<HomePage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              actions: <Widget>[
-                                CloseButton(
-                                  color: Colors.black,
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                // FloatingActionButton(onPressed: () {
-                                //   Navigator.of(context).pop();
-                                // },
-                                // child: const Icon(Icons.close),
-                                // )
-                              ],
-                              title: const Text('Alert Message!'),
-                              content: const Text(
-                                  'No More Data found in Your Database'),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0),
+                              side: const BorderSide(color: Colors.deepOrange)),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                
+                                children: [
+                                  const Text("Alert Message!"),
+                                  const Text('No More Data Found'),
+                                  _getCloseButton(context,)
+                                ],
+                              ),
                             );
                           });
                     }
@@ -220,26 +215,29 @@ class _HomePageState extends State<HomePage> {
                           elevation: 2,
                           margin: const EdgeInsets.all(2.0),
                           color: Colors.blue[200],
-                     
                           child: Column(
-                            
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            
                             children: [
-                              
-                              Text('${customerLists[index].firstName} ${customerLists[index].lastName}', textAlign: TextAlign.center, style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: AutofillHints.addressCity),),
-                              Text(customerLists[index].email, textAlign: TextAlign.start, style: const TextStyle(
+                              Text(
+                                '${customerLists[index].firstName} ${customerLists[index].lastName}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: AutofillHints.addressCity),
+                              ),
+                              Text(customerLists[index].email,
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
                                       color: Colors.amber,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: AutofillHints.addressCity)),
-                              const Padding(padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8)),
+                              const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 8)),
                             ],
-                            
                           ),
                         );
                       }
@@ -273,4 +271,16 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+Widget _getCloseButton(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pop(context);
+    },
+    child: Container(
+      alignment: FractionalOffset.topRight,
+      child: const Icon(Icons.clear, color: Colors.red),
+    ),
+  );
 }
