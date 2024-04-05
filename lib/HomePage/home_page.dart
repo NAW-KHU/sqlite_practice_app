@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqlite_practice_app/Model/customer.dart';
 import 'package:sqlite_practice_app/Model/customer_data.dart';
@@ -135,15 +138,27 @@ class _HomePageState extends State<HomePage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0),
-                              side: const BorderSide(color: Colors.deepOrange)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  side: const BorderSide(
+                                      color: Colors.black, width: 2.0)),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text("Alert Message!"),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        _getCloseButton(context),
+                                      ]),
+                                  const Text(
+                                    "ALERT MESSAGE !!!",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                   const Text('No More Data Found'),
-                                  _getCloseButton(context,)
                                 ],
                               ),
                             );
@@ -211,34 +226,42 @@ class _HomePageState extends State<HomePage> {
                         //   textColor: Colors.white,
                         //   subtitle: Text(customerList[index].email),
                         // );
-                        return Card(
+                        return 
+                        Card(
+                          
                           elevation: 2,
                           margin: const EdgeInsets.all(2.0),
                           color: Colors.blue[200],
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${customerLists[index].firstName} ${customerLists[index].lastName}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: AutofillHints.addressCity),
+                          child: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                textDirection: TextDirection.ltr,
+                                textBaseline: TextBaseline.alphabetic,
+                                children: [
+                                  Text(
+                                    '${customerLists[index].firstName} ${customerLists[index].lastName}',
+                                    textAlign: TextAlign.center,
+                                    textDirection: TextDirection.ltr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: AutofillHints.addressCity),
+                                  ),
+                                  Text(customerLists[index].email,
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                          color: Colors.amber,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily:
+                                              AutofillHints.addressCity)),
+                                  
+                                ],
                               ),
-                              Text(customerLists[index].email,
-                                  textAlign: TextAlign.start,
-                                  style: const TextStyle(
-                                      color: Colors.amber,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: AutofillHints.addressCity)),
-                              const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 8)),
-                            ],
                           ),
+                          
                         );
                       }
                     })),
@@ -280,7 +303,7 @@ Widget _getCloseButton(BuildContext context) {
     },
     child: Container(
       alignment: FractionalOffset.topRight,
-      child: const Icon(Icons.clear, color: Colors.red),
+      child: const Icon(Icons.clear, color: Colors.black),
     ),
   );
 }
